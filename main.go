@@ -7,20 +7,20 @@ import (
 )
 
 type InfoBases struct {
-	ClientID           string
-	InfoBasesCheckCode string
-	InfoBases          string
+	Root struct {
+		ClientID           string `json:"ClientID"`
+		InfoBasesCheckCode string `json:"InfoBasesCheckCode"`
+		InfoBases          string `json:"InfoBases"`
+	} `json:"root"`
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	var infoBases InfoBases
-	infoBases.ClientID = "000000"
-	infoBases.InfoBasesCheckCode = "sfdsdf"
-	infoBases.InfoBases = "sdfsdfsdfsfdsf"
+	infoBases.Root.ClientID = "000000"
+	infoBases.Root.InfoBasesCheckCode = "sfdsdf"
+	infoBases.Root.InfoBases = "sdfsdfsdfsfdsf"
 
-	ib := make(map[string]interface{})
-	ib["root"] = infoBases
-	buf, _ := json.Marshal(ib)
+	buf, _ := json.Marshal(infoBases)
 
 	fmt.Fprintf(w, "%s", buf)
 }
